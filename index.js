@@ -41,7 +41,7 @@ app.post('/item', (req, res) => {
       });
   }
   if (req.body.id) {
-    Item.find({ ids: req.body.id })
+    Item.find({ ids: { $in: req.body.id } })
       .limit(1)
       .then((item) => res.json({ status: 'ok', id: item[0]._id }))
       .catch(() => {
