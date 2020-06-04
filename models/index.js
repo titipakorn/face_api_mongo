@@ -6,7 +6,7 @@ const ItemSchema = new Schema({
     default: '',
   },
   ids: {
-    type: [Number],
+    type: [String],
     required: true,
   },
 });

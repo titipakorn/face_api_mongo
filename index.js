@@ -27,7 +27,7 @@ app.post('/item', (req, res) => {
       .then((items) => {
         items = items[0];
         if (req.body.id) {
-          items.ids.push(parseInt(req.body.id));
+          items.ids.push(req.body.id);
           items
             .save()
             .then(() => res.json({ status: 'ok', id: items._id }))
@@ -41,12 +41,12 @@ app.post('/item', (req, res) => {
       });
   }
   if (req.body.id) {
-    Item.find({ ids: { $in: req.body.id } })
+    Item.find({ ids: req.body.id })
       .limit(1)
       .then((item) => res.json({ status: 'ok', id: item[0]._id }))
       .catch(() => {
         const newItem = new Item();
-        newItem.ids.push(parseInt(req.body.id));
+        newItem.ids.push(req.body.id);
         newItem
           .save()
           .then((item) => res.json({ status: 'ok', id: item._id }))
