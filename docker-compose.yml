@@ -1,11 +1,13 @@
 version: '3'
 services:
-  app:
-    container_name: docker-node-mongo
+  api:
+    container_name: api
     restart: always
     build: .
-    ports:
-      - '80:3000'
+    # ports:
+    #   - '80:8000'
+    networks:
+      - face-sentiment
     links:
       - mongo
   mongo:
@@ -13,3 +15,8 @@ services:
     image: mongo
     ports:
       - '27017:27017'
+    networks:
+      - face-sentiment
+networks:
+  face-sentiment:
+    external: true

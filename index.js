@@ -56,5 +56,5 @@ app.post('/item', (req, res) => {
     res.json({ status: 'error' });
   }
 });
-const port = 3000;
+const port = 8000;
 app.listen(port, () => console.log('Server running...'));
