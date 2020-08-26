@@ -56,5 +56,19 @@ app.post('/item', (req, res) => {
     res.json({ status: 'error' });
   }
 });
+app.delete('/item', (req, res) => {
+  if (req.body.faceId) {
+    Item.find({ _id: req.body.faceId })
+      .limit(1)
+      .remove()
+      .exec()
+      .then(() => res.json({ status: 'ok' }))
+      .catch((err) => {
+        res.status(401).json({ msg: err });
+      });
+  } else {
+    res.json({ status: 'error' });
+  }
+});
 const port = 8000;
 app.listen(port, () => console.log('Server running...'));
